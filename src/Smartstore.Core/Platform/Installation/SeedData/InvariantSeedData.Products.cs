@@ -152,7 +152,7 @@ namespace Smartstore.Core.Installation
             return entities;
         }
 
-        private IList<Product> GetFashionProducts(
+        private List<Product> GetFashionProducts(
             Dictionary<string, Category> categories,
             Dictionary<string, Manufacturer> manufacturers,
             Dictionary<int, SpecificationAttribute> specAttributes)
@@ -163,8 +163,8 @@ namespace Smartstore.Core.Installation
             var firstDeliveryTime = _db.DeliveryTimes.First(x => x.DisplayOrder == 0);
             var thirdDeliveryTime = _db.DeliveryTimes.First(x => x.DisplayOrder == 2);
 
-            var specOptionCotton = (_db.SpecificationAttributes.First(x => x.DisplayOrder == 8)).SpecificationAttributeOptions.First(x => x.DisplayOrder == 9);
-            var taxCategoryIdApparel = (_db.TaxCategories.First(x => x.Name.Equals(TaxNameApparel))).Id;
+            var specOptionCotton = _db.SpecificationAttributes.First(x => x.DisplayOrder == 8).SpecificationAttributeOptions.First(x => x.DisplayOrder == 9);
+            var taxCategoryIdApparel = _db.TaxCategories.First(x => x.Name.Equals(TaxNameApparel)).Id;
 
             #region Category Shoes
 
@@ -666,11 +666,13 @@ namespace Smartstore.Core.Installation
             };
         }
 
-        private IList<Product> GetFurnitureProducts(Dictionary<string, Category> categories, Dictionary<int, SpecificationAttribute> specAttributes)
+        private List<Product> GetFurnitureProducts(
+            Dictionary<string, Category> categories,
+            Dictionary<int, SpecificationAttribute> specAttributes)
         {
             var productTemplateSimple = _db.ProductTemplates.First(x => x.ViewPath == "Product");
             var thirdDeliveryTime = _db.DeliveryTimes.First(x => x.DisplayOrder == 2);
-            var taxCategoryIdElectronics = (_db.TaxCategories.First(x => x.Name.Equals(TaxNameElectronics))).Id;
+            var taxCategoryIdElectronics = _db.TaxCategories.First(x => x.Name.Equals(TaxNameElectronics)).Id;
             var discounts = _db.Discounts.Where(x => x.DiscountTypeId == (int)DiscountType.AssignedToSkus && !x.RequiresCouponCode).ToList();
 
             #region Category Sofas
@@ -1282,10 +1284,10 @@ namespace Smartstore.Core.Installation
             var secondDeliveryTime = _db.DeliveryTimes.First(x => x.DisplayOrder == 1);
             var thirdDeliveryTime = _db.DeliveryTimes.First(x => x.DisplayOrder == 2);
 
-            var manufacturers = (_db.Manufacturers.ToList()).ToDictionarySafe(x => x.Name, x => x);
-            var categories = (_db.Categories.ToList()).ToDictionarySafe(x => x.Alias, x => x);
-            var specAttributes = (_db.SpecificationAttributes.ToList()).ToDictionarySafe(x => x.DisplayOrder, x => x);
-            var taxCategories = (_db.TaxCategories.ToList()).ToDictionarySafe(x => x.Name, x => x);
+            var manufacturers = _db.Manufacturers.ToList().ToDictionarySafe(x => x.Name, x => x);
+            var categories = _db.Categories.ToList().ToDictionarySafe(x => x.Alias, x => x);
+            var specAttributes = _db.SpecificationAttributes.ToList().ToDictionarySafe(x => x.DisplayOrder, x => x);
+            var taxCategories = _db.TaxCategories.ToList().ToDictionarySafe(x => x.Name, x => x);
 
             #region Category Sports
 
@@ -3655,7 +3657,7 @@ namespace Smartstore.Core.Installation
             return entities;
         }
 
-        public IList<ProductBundleItem> ProductBundleItems()
+        public List<ProductBundleItem> ProductBundleItems()
         {
             var products = (_db.Products.ToList()).ToDictionarySafe(x => x.Sku, x => x);
 

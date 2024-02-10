@@ -17,6 +17,7 @@
   - Added a button to remove the assignment of a customer to an affiliate on customer edit page.
 - Import news from RSS news feeds.
 - #971 Add a cart rule to check if the current customer is authenticated with a certain external authentication method.
+- Reverse proxy: added support for `X-Forwarded-Prefix` header (for `PathBase` resolution)
 
 ### Improvements
 
@@ -53,6 +54,7 @@
 - Fixed a product can only be added to the shopping cart with a quantity of 1 if the stock quantity is below 0.
 - #957 Fixed prices should not be hidden if the *Access Shopping Cart* permission has not been granted.
 - Fixed `NullReferenceException` calling search page without any search term.
+- Fixes `NullReferenceException` *typeFilter was null* when uploading a video.
 - Tax by region: fixed tax rate was not applied if asterisk placeholder character was saved for zip code.
 - #921 IOException "The filename, directory name, or volume label syntax is incorrect" when `MediaSettings.AppendFileVersionToUrl` is activated.
 - #922 Newsletter subscription event not triggered upon email confirmation.
@@ -65,6 +67,7 @@
 - Page Builder
   - Some radio button groups were not deselectable
   - Story min-height (medium | tall) often resulted in broken page layout
+  - #991 topic target *homepage* was not imported correctly.
 - Forum:
   - #951 The forum post page counter is always incremented by 2 when the page is opened.
   - Fixed HTML links are not displayed in posts.
@@ -77,6 +80,8 @@
 - Some external authentication methods (like AmazonPay) were not displayed on customer pages.
 - Hitting the return key in the text field of a product variant resulted in a 404 status error.
 - Fixed *QuantityBelowStoreOwnerNotification* was sent twice.
+- #1001 MediaManager: fix *moov atom not found* ffmpeg issue in `VideoHandler`.
+- Fixed the e-mail subject was not transferred when sending an e-mail from customer edit page.
 
 
 ## Smartstore 5.1.0

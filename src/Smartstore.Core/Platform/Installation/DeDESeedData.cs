@@ -33,7 +33,7 @@ namespace Smartstore.Core.Installation
 {
     public class DeDESeedData : InvariantSeedData
     {
-        private readonly IDictionary<string, TaxCategory> _taxCategories = new Dictionary<string, TaxCategory>();
+        private readonly Dictionary<string, TaxCategory> _taxCategories = [];
         private DeliveryTime _defaultDeliveryTime;
 
         protected override void Alter(Customer entity)
@@ -2442,7 +2442,7 @@ namespace Smartstore.Core.Installation
             entities.Where(x => x.BadgeText.EqualsNoCase("NEW")).Each(x => x.BadgeText = "NEU");
         }
 
-        private void AlterFashionProducts(IList<Product> entities)
+        private static void AlterFashionProducts(IList<Product> entities)
         {
             entities.WithKey(x => x.Sku)
                 .Alter("Fashion-112355", x =>
@@ -2486,7 +2486,7 @@ namespace Smartstore.Core.Installation
                 });
         }
 
-        private void AlterFurnitureProducts(IList<Product> entities)
+        private static void AlterFurnitureProducts(IList<Product> entities)
         {
             entities.WithKey(x => x.Sku)
                 .Alter("Furniture-lc6", x =>
